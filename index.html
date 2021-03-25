@@ -27,11 +27,48 @@
       Stop
     </button>
     
+    <text>
+      Lives:
+    </text>
+    <text id="livesleft">
+    </text>
+    
     <div id="gameButtonArea">
-      <button id="button1" onclick="guess(1)" onmousedown="startTone(1)" onmouseup="stopTone()"></button>
-      <button id="button2" onclick="guess(2)" onmousedown="startTone(2)" onmouseup="stopTone()"></button>
-      <button id="button3" onclick="guess(3)" onmousedown="startTone(3)" onmouseup="stopTone()"></button>
-      <button id="button4" onclick="guess(4)" onmousedown="startTone(4)" onmouseup="stopTone()"></button>
+      <button id="button1" onclick="guess(1)" onmousedown="startTone(1)" onmouseup="stopTone(1)">
+        <img
+          id = "img1"
+          class = "hidden"
+          src = "https://cdn.glitch.com/67f36850-903c-41cd-82b0-cf1970ce467b%2Fthumbnails%2Fbutton1.jpg?1616542805115"
+        />
+      </button>
+      <button id="button2" onclick="guess(2)" onmousedown="startTone(2)" onmouseup="stopTone(2)">
+      <img
+          id = "img2"
+          class = "hidden"
+          src = "https://cdn.glitch.com/67f36850-903c-41cd-82b0-cf1970ce467b%2Fthumbnails%2Fbutton2.jpg?1616542806292"
+        />
+      </button>
+      <button id="button3" onclick="guess(3)" onmousedown="startTone(3)" onmouseup="stopTone(3)">
+      <img
+          id = "img3"
+          class = "hidden"
+          src = "https://cdn.glitch.com/67f36850-903c-41cd-82b0-cf1970ce467b%2Fthumbnails%2Fbutton3.jpg?1616542810774"
+        />
+      </button>
+      <button id="button4" onclick="guess(4)" onmousedown="startTone(4)" onmouseup="stopTone(4)">
+      <img
+          id = "img4"
+          class = "hidden"
+          src = "https://cdn.glitch.com/67f36850-903c-41cd-82b0-cf1970ce467b%2Fbutton4.jpg?1616542814347"
+        />
+      </button>
+      <button id="button5" onclick="guess(5)" onmousedown="startTone(5)" onmouseup="stopTone(5)">
+      <img
+          id = "img5"
+          class = "hidden"
+          src = "https://cdn.glitch.com/67f36850-903c-41cd-82b0-cf1970ce467b%2Fthumbnails%2Fbutton6.jpg?1616542821775"
+        />
+      </button>
     </div>
 
   </body>

@@ -1,20 +1,29 @@
 // global constants
-const clueHoldTime = 1000; //how long to hold each clue's light/sound
 const cluePauseTime = 333; //how long to pause in between clues
 const nextClueWaitTime = 1000; //how long to wait before starting playback of the clue sequence
 
 //Global Variables
-var pattern = [2, 2, 4, 3, 2, 1, 2, 4];
+var clueHoldTime = 1000; 
+var pattern = [2, 5, 4, 3, 2, 1, 2, 4];
 var progress = 0; 
 var gamePlaying = false;
 var tonePlaying = false;
 var volume = 0.5;  //must be between 0.0 and 1.0
 var guessCounter = 0;
+var chances = 3;
+document.getElementById("livesleft").innerText = chances;
+var t = 0
 
 function startGame(){
   //initialize game variables
   progress = 0;
+  clueHoldTime = 1000;
   gamePlaying = true;
+  chances = 3;
+  document.getElementById("livesleft").innerText = chances;
+  t = Date.now()
+  
+  generatesequence(1,5);  // generate random sequence
   
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.add("hidden");
@@ -23,7 +32,17 @@ function startGame(){
   playClueSequence();  
 }
 
+function generatesequence(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  for(let i=0; i < 8; i++){
+    pattern[i] = Math.floor(Math.random() * (max - min + 1) + min);
+  }
+}
+
 function stopGame() {
+  chances = 3;
+  document.getElementById("livesleft").innerText = chances;
   gamePlaying = false;
   // swap the Start and Stop buttons
   document.getElementById("startBtn").classList.remove("hidden");
@@ -32,10 +51,12 @@ function stopGame() {
 
 function lightButton(btn){
   document.getElementById("button"+btn).classList.add("lit")
+  document.getElementById("img"+btn).classList.remove("hidden")
 }
 
 function clearButton(btn){
   document.getElementById("button"+btn).classList.remove("lit")
+  document.getElementById("img"+btn).classList.add("hidden")
 }
 
 function playSingleClue(btn){
@@ -54,6 +75,7 @@ function playClueSequence(){
     setTimeout(playSingleClue,delay,pattern[i]) // set a timeout to play that clue
     delay += clueHoldTime 
     delay += cluePauseTime;
+    clueHoldTime = clueHoldTime - 25;
   }
 }
 
@@ -63,7 +85,9 @@ function loseGame(){
 }
 function winGame(){
   stopGame();
-  alert("Game Over. You won!");
+  var totaltime = Date.now() - t;
+  totaltime = totaltime / 1000;
+  alert("Game Over. You won! Time Taken: " + totaltime);
 }
 
 function guess(btn){
@@ -88,35 +112,50 @@ function guess(btn){
     guessCounter++;
   }
   }else{
-    //Guess was incorrect
-    //GAME OVER: LOSE!
-    loseGame();
+    //Guess was incorrect, increment mistakes
+    chances -= 1;
+    document.getElementById("livesleft").innerText = chances;
+    //GAME OVER if all 3 strikes used
+    if (chances == 0){
+      loseGame(); 
+    }
   }
 }
 
 // Sound Synthesis Functions
 const freqMap = {
-  1: 261.6,
-  2: 329.6,
-  3: 392,
-  4: 466.2
+  1: 440,
+  2: 261.63,
+  3: 264.6,
+  4: 349.228,
+  5: 319.6,
+  6: 300.1,
+  7: 230.4,
+  8: 350.1
 }
+
 function playTone(btn,len){ 
-  o.frequency.value = freqMap[btn]
+  o1.frequency.value = freqMap[btn]
+  o2.frequency.value = freqMap[btn + 1]
+  o3.frequency.value = freqMap[btn + 3]
   g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)
   tonePlaying = true
   setTimeout(function(){
-    stopTone()
+    stopTone(btn)
   },len)
 }
 function startTone(btn){
   if(!tonePlaying){
-    o.frequency.value = freqMap[btn]
+    document.getElementById("img"+btn).classList.remove("hidden")
+    o1.frequency.value = freqMap[btn]
+    o2.frequency.value = freqMap[btn + 1]
+    o3.frequency.value = freqMap[btn + 3]
     g.gain.setTargetAtTime(volume,context.currentTime + 0.05,0.025)
     tonePlaying = true
   }
 }
-function stopTone(){
+function stopTone(btn){
+    document.getElementById("img"+btn).classList.add("hidden")
     g.gain.setTargetAtTime(0,context.currentTime + 0.05,0.025)
     tonePlaying = false
 }
@@ -124,9 +163,15 @@ function stopTone(){
 //Page Initialization
 // Init Sound Synthesizer
 var context = new AudioContext()
-var o = context.createOscillator()
+var o1 = context.createOscillator()
+var o2 = context.createOscillator()
+var o3 = context.createOscillator()
 var g = context.createGain()
 g.connect(context.destination)
 g.gain.setValueAtTime(0,context.currentTime)
-o.connect(g)
-o.start(0)
+o1.connect(g)
+o1.start(0)
+o2.connect(g)
+o2.start(0)
+o3.connect(g)
+o3.start(0)
