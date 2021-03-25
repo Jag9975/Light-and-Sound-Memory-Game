@@ -1,26 +1,36 @@
 /* CSS files add styling rules to your content */
 
 body {
+  text-align: center;
   font-family: helvetica, arial, sans-serif;
   margin: 2em;
-  background-color: slategrey;#lightpink;
-  color: white;#navy;
+  background-color: slategrey;
+  color: white;
 }
 
 h1 {
-  font-family: verdana, arial, sans-serif; 
+  font-family: verdana, arial, sans-serif;
+  color: lightblue;
 }
 
 button {
   padding: 10px;
   border-radius: 10px;
   min-width: 55px;
+  margin: 4em;
 }
 
 #gameButtonArea > button {
   width:200px;
   height:200px;
   margin:2px;
+}
+
+img {
+  padding: 13px;
+  display: block;
+  height: 150px;  
+  width: 150px;
 }
 
 .hidden {
@@ -53,4 +63,11 @@ button {
 }
 #button4:active, #button4.lit {
     background:yellow;
+}
+
+#button5 {
+    background: #FFDC73;
+}
+#button5:active, #button5.lit {
+    background:orange;
 }
