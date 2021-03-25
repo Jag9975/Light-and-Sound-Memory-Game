@@ -40,7 +40,8 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-![](your-link-here)
+![](https://user-images.githubusercontent.com/49300175/112401418-bcde5500-8cc7-11eb-8e9c-90031548be2f.gif)
+
 
 
 ## Reflection Questions
@@ -49,10 +50,10 @@ Here's a walkthrough of implemented user stories:
 - Styling: https://www.w3schools.com/css/default.asp
 
 2. What was a challenge you encountered in creating this submission (be specific)? How did you overcome it? (recommended 200 - 400 words) 
-- While working on this project, a challenge I encountered was setting up the stopwatch. Although calculating the total time to finish the game is not that challenging, the hard part was setting up the clock. It was hard to implement since I had never used the time function in Javascript before. I was able to find several different Javascript time functions online. I decided to use Date.now() function, which returns the UNIX time. To calculate the total time taken, you can subtract the finish time from the start time. I created a variable to store the time when the player presses the Start button. When the player wins, I calculate the difference between the current time and the time when the Start button was pressed. Since the time is in milliseconds, we have to divide it by 1000 to get the time in seconds. 
+- While working on this project, a challenge I encountered was setting up the stopwatch. Although calculating the total time to finish the game is not that challenging, the hard part was setting up the clock. It was hard to implement since I had never used the time function in Javascript before. I was able to find several different Javascript time functions online. I decided to use Date.now() function, which returns the current UNIX time. To calculate the total time taken, you can subtract the finish time from the start time. I created a variable to store the time when the player presses the Start button. When the player wins, I calculate the difference between the current time and the time when the Start button was pressed. Since the time is in milliseconds, we have to divide it by 1000 to get the time in seconds. 
 
 3. What questions about web development do you have after completing your submission? (recommended 100 - 300 words) 
-- I do not have any web development-related questions as I have experience working with ReactJS, Javascript, HTML, and CSS. I am just curious about how to render dynamic content in HTML. With ReactJS, you can use the map function to iterate through the data array. I am not sure how that would work if we were to implement this in plain Javascript. Also, Is there any benefit of using plain Javascript over other web development frameworks like AngularJS or ReactJS? 
+- I do not have any web development related questions as I have experience working with ReactJS, Javascript, HTML, and CSS. I am just curious about how to render dynamic content in HTML. With ReactJS, you can use the map function to iterate through the data array. I am not sure how that would work if we were to implement this in plain Javascript. Also, Is there any benefit of using plain Javascript over other web development frameworks like AngularJS or ReactJS? 
 
 4. If you had a few more hours to work on this project, what would you spend them doing (for example: refactoring certain functions, adding additional features, etc). Be specific. (recommended 100 - 300 words) 
 - If I had few more hours to work on this project, I would work on adding a timer. The player would only have a limited amount of time to enter their guess each turn. If the correct answer is not entered within the allocated time, the game ends. I would also create additional difficulty modes. Currently, the player has no option but to play the default mode with 8 sequences. I would add an easy mode with 4 sequences, and a hard more with 12 sequences. I would also add a custom mode option, where the user can enter a custom number of sequences. 
